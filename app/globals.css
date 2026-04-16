@@ -7,6 +7,8 @@ html {
 }
 
 body {
+  overflow-x: hidden;
+
   margin: 0;
   min-height: 100vh;
   background: #000;
@@ -33,27 +35,6 @@ a {
   padding: 0 1rem;
 }
 
-.nav-liquid-glass {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  padding: 0.75rem 2.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 0, 0, 0.37),
-    inset 0 0 80px rgba(255, 255, 255, 0.02);
-}
-
-.nav-logo {
-  font-weight: 800;
-  letter-spacing: 0.2rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
-}
 
 .nav-links {
   display: flex;
@@ -73,29 +54,55 @@ a {
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-@keyframes liquid-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-5px) scale(1.01); }
-}
-
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding-top: 80px;
+  padding: 0;
+  transform: none;
+}
+
+.hero-stack {
+  position: relative;
+  display: flex;
+  line-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
 }
 
 .hero-portrait {
-  position: relative;
-  width: 30%;
+  display: block;
+  width: min(750px, 80vw);
   height: auto;
   object-fit: cover;
 }
 
-.hero-centered {
-  min-height: 100vh;
+.hero-stack::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: -7px;
+  bottom: -17px;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 90%);
+  filter: blur(10px);
+  pointer-events: none;
 }
+
+.namaku {
+  margin: 0;
+  width: max-content;
+  max-width: 1000%;
+  font-size: clamp(40px, 8vw, 100px);
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: center;
+}
+
 
 @media (max-width: 720px) {
   .hero {
