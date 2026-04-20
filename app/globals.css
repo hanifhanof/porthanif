@@ -56,56 +56,127 @@ a {
 
 .hero {
   position: relative;
-  min-height: 80vh;
-  display: grid;
-  place-items: center;
-  padding-top: 80px;
-  padding: 0;
-  transform: none;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.75rem, 2vw, 2rem);
+  padding: 88px 1rem 0;
+  transform: none;  
 }
 
 .hero-stack {
+  order: 2;
+  overflow: visible;
   position: relative;
-  display: flex;
-  line-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
+  line-height: 0;
+  margin-top: 0;
+  align-self: flex-end;
+  transform: translate(145px, -10vh);
 }
 
 .hero-portrait {
   display: block;
-  width: min(750px, 80vw);
+  width: min(750px, 78vw);
   height: auto;
   object-fit: cover;
+
 }
 
 .hero-stack::after {
   content: "";
   position: absolute;
   left: 10px;
-  right: -7px;
-  bottom: -17px;
-  height: 30%;
+  right: -11px;
+  bottom: -20px;
+  height: 50%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 90%);
   filter: blur(10px);
   pointer-events: none;
 }
 
 .namaku {
+  order: 1;
   margin: 0;
-  width: max-content;
-  max-width: 1000%;
-  font-size: clamp(40px, 8vw, 100px);
-  line-height: 1.2;
+  max-width: 100%;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
   white-space: nowrap;
-  text-align: center;
+  align-self: center;
+  transform: translate(-70px, -12vh);
+}
+
+.namaku-title {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.namaku-role {
+  margin: 0;
+  font-size: clamp(24px, 2vw, 24px);
+  line-height: 1.30;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.namaku-desc {
+  margin: 0;
+  font-size: clamp(20px, 1.4vw, 18px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 40ch;
 }
 
 
 @media (max-width: 720px) {
   .hero {
-    padding: 16px;
+    min-height: 80svh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.74rem;
+    padding: 72px 16px 24px;
+  }
+
+  .hero-stack {
+    order: 1;
+    align-self: center;
+    transform: translateY(-4vh);
+  }
+
+  .hero-portrait {
+    width: min(500px, 84vw);
+
+  }
+
+  .namaku {
+    order: 2;
+    white-space: normal;
+    text-align: center;
+    align-items: center;
+    max-width: 92%;
+    transform: none;
+    font-size: clamp(45px, 9vw, 10px);
+  }
+
+  .namaku-title {
+    white-space: nowrap;
+    font-size: clamp(32px, 9vw, 46px);
+  }
+
+  .namaku-role {
+    white-space: nowrap;
+    font-size: clamp(20px, 4vw, 24px);
+  }
+
+  .namaku-desc {
+    margin: 0 auto;
+    text-align: center;
+    white-space: normal;
+    font-size: clamp(16px, 3vw, 18px);
   }
 }
