@@ -97,6 +97,23 @@ a {
   pointer-events: none;
 }
 
+.about-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 48px 0 0 0;
+  padding: 0 1rem;
+  min-height: 200px;
+}
+
+.about-section p {
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 3rem;
+}
+
 .namaku {
   order: 1;
   margin: 0;

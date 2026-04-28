@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import ShinyText from "@/components/ShinyText";
-import SplitText from "@/components/SplitText";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
@@ -34,23 +33,7 @@ export default function Home() {
 
         <div className="namaku">
           <h1 className="namaku-title">
-            {!introDone ? (
-              <SplitText
-                text="Hello, I'm Hanif"
-                tag="span"
-                splitType="chars"
-                delay={45}
-                duration={0.9}
-                from={{ opacity: 0, y: 30 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="0px"
-                onLetterAnimationComplete={() => setIntroDone(true)}
-                className="hero-intro-text"
-              />
-            ) : (
-              <ShinyText text="Hello, I'm Hanif" />
-            )}
+            <ShinyText text="Hello, I'm Hanif!" />
           </h1>
 
           <p className="namaku-role">Cybersecurity Enthusiast & Digital Creator</p>
@@ -58,6 +41,12 @@ export default function Home() {
             Exploring cybersecurity while creating engaging digital content.
           </p>
         </div>
+      </section>
+
+      <section className="about-section">
+        <p>
+          I'm a passionate cybersecurity enthusiast and digital creator, always eager to learn and explore the latest trends in both fields.
+        </p>
       </section>
     </main>
   );
