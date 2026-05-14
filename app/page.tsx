@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import ShinyText from "@/components/ShinyText";
 import ScrollReveal from "@/components/ScrollReveal";
+import Particles from "@/components/Particles";
 import {
   Dialog,
   DialogContent,
@@ -39,7 +40,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="portfolio-page">
+    <main className="portfolio-page">    
       <nav className={`nav-container ${showNavbar ? "show-nav" : "hide-nav"}`}>
         <div className="nav-liquid-glass">
           <div className="nav-links">

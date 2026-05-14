@@ -113,9 +113,9 @@ a {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: clamp(0.75rem, 2vw, 2rem);
-  padding: 88px 1rem 0;
+  padding: 140px 1rem 4rem;
   transform: none;  
 }
 
@@ -128,8 +128,7 @@ a {
   align-items: center;
   line-height: 0;
   margin-top: 0;
-  align-self: flex-end;
-  transform: translate(60px, -10vh);
+  transform: translate(40px, 2vh);
 }
 
 .hero-portrait {
@@ -306,7 +305,8 @@ a {
   .hero-stack {
     order: 1;
     align-self: center;
-    transform: translateY(-4vh);
+    transform: translateY(-2vh);
+    max-width: 100%;
   }
 
   .hero-portrait {
