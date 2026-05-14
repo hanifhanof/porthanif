@@ -1,5 +1,50 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
 :root {
   color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 html {
@@ -32,8 +77,18 @@ a {
   display: flex;
   justify-content: center;
   padding: 0 1rem;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
+.show-nav {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hide-nav {
+  transform: translateY(-12px);
+  opacity: 0;
+}
 
 .nav-links {
   display: flex;
@@ -74,7 +129,7 @@ a {
   line-height: 0;
   margin-top: 0;
   align-self: flex-end;
-  transform: translate(145px, -10vh);
+  transform: translate(60px, -10vh);
 }
 
 .hero-portrait {
@@ -99,22 +154,112 @@ a {
 
 .about-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  margin: 48px 0 0 0;
-  padding: 0 1rem;
-  min-height: 200px;
+  padding: 6rem 2rem;
 }
 
 .about-section p {
-  max-width: 600px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 3rem;
+  max-width: 850px;
+  font-size: clamp(1rem, 1.2vw, 2rem);
+  line-height: 1.9;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.72);
+}
+
+.about-section-text {
+  font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+}
+
+.about-section .scroll-reveal-text {
+  font-family: "SF Pro Display", sans-serif;
+
+}
+
+.experience-section {
+  padding: 8rem 2rem;
+}
+
+.experience-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 3rem;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.experience-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  padding: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-width: 320px;
+}
+
+.experience-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.experience-info {
+  padding: 1rem 0.5rem 0.3rem;
+}
+
+.experience-info h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.experience-info p {
+  margin-top: 0.4rem;
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+}
+
+
+.experience-dialog {
+  background: #0b0b0c !important;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  color: white;
+  padding: 1rem;
+}
+
+.dialog-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 1.2rem;
+}
+
+.dialog-title {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.dialog-description {
+  margin-top: 1rem;
+  color: rgba(255,255,255,0.72) !important;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 .namaku {
+  font-family: "SF Pro Display", sans-serif;
   order: 1;
   margin: 0;
   max-width: 100%;
@@ -147,7 +292,6 @@ a {
   max-width: 40ch;
 }
 
-
 @media (max-width: 720px) {
   .hero {
     min-height: 80svh;
@@ -156,6 +300,7 @@ a {
     align-items: center;
     gap: 0.74rem;
     padding: 72px 16px 24px;
+    overflow: hidden;
   }
 
   .hero-stack {
@@ -166,7 +311,7 @@ a {
 
   .hero-portrait {
     width: min(500px, 84vw);
-
+    max-width: 100%;
   }
 
   .namaku {
@@ -176,17 +321,17 @@ a {
     align-items: center;
     max-width: 92%;
     transform: none;
-    font-size: clamp(45px, 9vw, 10px);
+    font-size: clamp(32px, 9vw, 45px);
   }
 
   .namaku-title {
-    white-space: nowrap;
+    white-space: normal;
     font-size: clamp(32px, 9vw, 46px);
   }
 
   .namaku-role {
-    white-space: nowrap;
-    font-size: clamp(20px, 4vw, 24px);
+    white-space: normal;
+    font-size: clamp(17px, 4vw, 24px);
   }
 
   .namaku-desc {
@@ -194,5 +339,94 @@ a {
     text-align: center;
     white-space: normal;
     font-size: clamp(16px, 3vw, 18px);
+  }
+}
+
+@theme inline {
+  --font-heading: var(--font-mono);
+  --font-mono: var(--font-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-mono;
   }
 }
