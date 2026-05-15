@@ -17,6 +17,7 @@ import { motion } from "motion/react";
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -41,15 +42,37 @@ export default function Home() {
   return (
     <main className="portfolio-page">    
       <nav className={`nav-container ${showNavbar ? "show-nav" : "hide-nav"}`}>
-        <div className="nav-liquid-glass">
-          <div className="nav-links">
-            <a href="#about">About</a>
-            <a href="#work">Experience</a>
-            <a href="#project">Project</a>
-            <a href="#contact">Contact</a>
-          </div>
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Experience</a>
+          <a href="#project">Project</a>
+          <a href="#contact">Contact</a>
         </div>
+
+        <button 
+          className="hamburger-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-label="Toggle mobile menu"
+          aria-controls="mobile-menu"
+        >
+          <span className="hamburger-bar bar-1"></span>
+          <span className="hamburger-bar bar-2"></span>
+          <span className="hamburger-bar bar-3"></span>
+        </button>
       </nav>
+
+      <div 
+        className={`mobile-menu ${menuOpen ? "open" : ""}`}
+        id="mobile-menu"
+      >
+        <div className="mobile-menu-content">
+          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a href="#work" onClick={() => setMenuOpen(false)}>Experience</a>
+          <a href="#project" onClick={() => setMenuOpen(false)}>Project</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+        </div>
+      </div>
 
       <section className="hero">
         <div className="hero-stack">
