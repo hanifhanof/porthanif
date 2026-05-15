@@ -312,19 +312,18 @@ a {
    ============================================ */
 
 .hamburger-btn {
-  display: none; /* Hide on desktop, show on mobile via media query */
+  display: none; /* Tetap sembunyikan di desktop */
   width: 44px;
   height: 44px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  position: relative;
-  z-index: 101; /* Higher than menu */
+  padding: 12px 10px;
   position: absolute;
   right: 16px;
-  top: 100%;
+  top: 50%;
   transform: translateY(-50%);
+  z-index: 101;
 }
 
 .hamburger-btn:focus-visible {
@@ -332,46 +331,38 @@ a {
   outline-offset: 2px;
 }
 
-/* Individual Bars */
+/* Individual Bars - Sekarang posisinya statis di dalam Flexbox */
 .hamburger-bar {
   display: block;
   width: 24px;
   height: 2px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 1px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* HAPUS left: 50%, transform, dan position: absolute di sini */
 }
 
-.hamburger-bar.bar-1 {
-  top: 8px;
+/* Hamburger X State - Tetap gunakan absolute SAAT AKTIF agar rotasinya pas di tengah */
+.hamburger-btn[aria-expanded="true"] {
+  justify-content: center; /* Kumpulkan di tengah saat jadi X */
 }
 
-.hamburger-bar.bar-2 {
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.hamburger-btn[aria-expanded="true"] .hamburger-bar {
+  position: absolute;
 }
 
-.hamburger-bar.bar-3 {
-  bottom: 8px;
-}
-
-/* Hamburger X State - Smooth Transition */
 .hamburger-btn[aria-expanded="true"] .bar-1 {
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .hamburger-btn[aria-expanded="true"] .bar-2 {
   opacity: 0;
-  transform: translateX(-50%) translateY(-50%) scale(0);
+  transform: scale(0);
 }
 
 .hamburger-btn[aria-expanded="true"] .bar-3 {
-  bottom: 50%;
-  transform: translateX(-50%) translateY(50%) rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 /* ============================================
@@ -445,7 +436,10 @@ a {
 
 @media (max-width: 720px) {
   .hamburger-btn {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .nav-links {
