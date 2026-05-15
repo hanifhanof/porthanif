@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import ShinyText from "@/components/ShinyText";
 import ScrollReveal from "@/components/ScrollReveal";
-import Particles from "@/components/Particles";
 import {
   Dialog,
   DialogContent,
