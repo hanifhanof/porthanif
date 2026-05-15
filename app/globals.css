@@ -298,14 +298,14 @@ a {
     justify-content: center;
     align-items: center;
     gap: 0.74rem;
-    padding: 72px 16px 24px;
+    padding: 130px 16px 40px;
     overflow: hidden;
   }
 
   .hero-stack {
     order: 1;
     align-self: center;
-    transform: translateY(-2vh);
+    transform: translateY(1vh);
     max-width: 100%;
   }
 
