@@ -188,8 +188,7 @@ a {
 }
 
 .about-section .scroll-reveal-text {
-  font-family: "SF Pro Display", sans-serif;
-
+  font-family: "Inter", sans-serif;
 }
 
 .experience-section {
@@ -274,7 +273,7 @@ a {
 }
 
 .namaku {
-  font-family: "SF Pro Display", sans-serif;
+  font-family: "Inter", sans-serif;
   order: 1;
   margin: 0;
   max-width: 100%;
@@ -312,7 +311,7 @@ a {
    ============================================ */
 
 .hamburger-btn {
-  display: none; /* Tetap sembunyikan di desktop */
+  display: none; /* Sembunyikan di desktop */
   width: 44px;
   height: 44px;
   background: none;
@@ -323,7 +322,7 @@ a {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 101;
+  z-index: 200; /* DINAIKKAN: Harus lebih tinggi dari .mobile-menu (100) agar bisa diklik */
 }
 
 .hamburger-btn:focus-visible {
@@ -331,7 +330,7 @@ a {
   outline-offset: 2px;
 }
 
-/* Individual Bars - Sekarang posisinya statis di dalam Flexbox */
+/* Garis-garis hamburger saat kondisi normal */
 .hamburger-bar {
   display: block;
   width: 24px;
@@ -339,32 +338,57 @@ a {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 1px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* HAPUS left: 50%, transform, dan position: absolute di sini */
+  transform-origin: center; /* Pusat rotasi pas di tengah */
 }
 
-/* Hamburger X State - Tetap gunakan absolute SAAT AKTIF agar rotasinya pas di tengah */
+/* MEDIA QUERY - Mengaktifkan flexbox pada mobile */
+@media (max-width: 720px) {
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ANIMASI MENJADI HURUF X (Saat aria-expanded="true") */
 .hamburger-btn[aria-expanded="true"] {
-  justify-content: center; /* Kumpulkan di tengah saat jadi X */
+  justify-content: center; /* Kumpulkan semua garis di tengah kotak */
+  position: fixed; /* MENGUNCI POSISI: Agar tombol X tidak ikut geser saat di mobile */
+  top: 28px; /* Sesuaikan agar posisinya pas di dalam navbar saat fixed */
 }
 
 .hamburger-btn[aria-expanded="true"] .hamburger-bar {
   position: absolute;
+  top: calc(50% - 1px); /* Posisi vertikal tepat di tengah */
+  left: calc(50% - 12px); /* Posisi horizontal tepat di tengah */
 }
 
-.hamburger-btn[aria-expanded="true"] .bar-1 {
+/* Putar garis ke-1 45 derajat */
+.hamburger-btn[aria-expanded="true"] .hamburger-bar.bar-1 {
   transform: rotate(45deg);
 }
 
-.hamburger-btn[aria-expanded="true"] .bar-2 {
+/* Hilangkan garis ke-2 */
+.hamburger-btn[aria-expanded="true"] .hamburger-bar.bar-2 {
   opacity: 0;
   transform: scale(0);
 }
 
-.hamburger-btn[aria-expanded="true"] .bar-3 {
+/* Putar garis ke-3 -45 derajat */
+.hamburger-btn[aria-expanded="true"] .hamburger-bar.bar-3 {
   transform: rotate(-45deg);
 }
 
+/* ============================================
+   KUNCI SCROLL PADA BODY (WAJIB ADA)
+   ============================================ */
+body.menu-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed; /* Trik tambahan jika overflow:hidden bocor di iOS Safari */
+  width: 100%;
+}
 /* ============================================
    MOBILE MENU - Overlay with Glass Effect
    ============================================ */
