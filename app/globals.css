@@ -68,34 +68,36 @@ a {
   min-height: 100vh;
 }
 
+/* ==========================================================================
+   1. DEFAULT NAVBAR: KHUSUS UNTUK POV HP / MOBILE (Di bawah 720px)
+   ========================================================================== */
 .nav-container {
   position: fixed;
   top: 24px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Trik menengahkan bentuk kapsul di HP */
   width: 90%;
   max-width: 900px;
   height: 56px;
   padding: 0 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50px;
+  justify-content: space-between; /* Logo di kiri, Menu/Hamburger di kanan */
+  border-radius: 50px; /* POV HP TETAP MELENGKUNG BENTUK KAPSUL */
   
-  /* Glassmorphism Effect */
+  /* Efek Kaca (Glassmorphism) */
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  
-  /* Border tipis untuk efek kilauan kaca */
   border: 1px solid rgba(255, 255, 255, 0.15);
-  
-  /* Shadow halus agar terlihat melayang */
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   z-index: 100;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  
+  /* Transisi perubahan lancar */
+  transition: transform 0.35s ease, opacity 0.35s ease, border-radius 0.35s ease, width 0.35s ease;
 }
 
+/* Animasi Muncul & Sembunyi khusus POV HP (Wajib mempertahankan translateX(-50%)) */
 .show-nav {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
@@ -106,6 +108,38 @@ a {
   opacity: 0;
 }
 
+
+/* ==========================================================================
+   2. MEDIA QUERY: KHUSUS UNTUK POV PC / DESKTOP (Lebar Layar > 720px)
+   ========================================================================== */
+@media (min-width: 721px) {
+  .nav-container {
+    top: 0;                 /* Tempel ke paling atas monitor */
+    left: 0;                /* Mulai dari ujung paling kiri */
+    transform: none;        /* MATIKAN fungsi centering milik HP */
+    width: 100%;            /* Paksa panjangnya mentok kanan 100% */
+    max-width: 100%;        /* Hapus batas lebar maksimal */
+    border-radius: 0;       /* POV PC TIDAK ADA MELENGKUNG SAMA SEKALI */
+    
+    /* Modifikasi border: Hanya garis tipis di bawah navbar */
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Animasi Muncul & Sembunyi khusus POV PC (Bebas dari gangguan translateX HP) */
+  .show-nav {
+    transform: translateY(0) !important;
+    opacity: 1;
+  }
+
+  .hide-nav {
+    transform: translateY(-56px) !important; /* Sembunyi naik ke atas setinggi navbar */
+    opacity: 0;
+  }
+}
+
+  /* Sesuaikan animasi sembunyi/muncul khusus PC tanpa gangguan translateX */
 .nav-links {
   display: flex;
   gap: 2rem;

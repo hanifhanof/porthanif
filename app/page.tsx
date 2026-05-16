@@ -60,6 +60,10 @@ export default function Home() {
     <main className="portfolio-page">    
       {/* NAVBAR CONTAINER */}
       <nav className={`nav-container ${showNavbar ? "show-nav" : "hide-nav"}`}>
+        <div className="nav-logo">
+          <a href="#hero">Rizqhnif</a>
+        </div>
+
         <div className="nav-links">
           <a href="#about">About</a>
           <a href="#work">Experience</a>
