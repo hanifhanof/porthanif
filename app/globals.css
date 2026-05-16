@@ -69,20 +69,20 @@ a {
 }
 
 /* ==========================================================================
-   1. DEFAULT NAVBAR: KHUSUS UNTUK POV HP / MOBILE (Di bawah 720px)
+   1. DEFAULT NAVBAR: UNTUK POV HP / MOBILE (Di bawah 720px)
    ========================================================================== */
 .nav-container {
   position: fixed;
   top: 24px;
   left: 50%;
-  transform: translateX(-50%); /* Trik menengahkan bentuk kapsul di HP */
+  transform: translateX(-50%); /* Sentralisasi bentuk kapsul di HP */
   width: 90%;
   max-width: 900px;
   height: 56px;
   padding: 0 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Logo di kiri, Menu/Hamburger di kanan */
+  justify-content: space-between; /* Logo di kiri, Hamburger di kanan */
   border-radius: 50px; /* POV HP TETAP MELENGKUNG BENTUK KAPSUL */
   
   /* Efek Kaca (Glassmorphism) */
@@ -92,17 +92,19 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   z-index: 100;
-  
-  /* Transisi perubahan lancar */
-  transition: transform 0.35s ease, opacity 0.35s ease, border-radius 0.35s ease, width 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-/* Animasi Muncul & Sembunyi khusus POV HP (Wajib mempertahankan translateX(-50%)) */
+/* Sembunyikan menu teks desktop saat di layar HP */
+.nav-links {
+  display: none;
+}
+
+/* Animasi Muncul & Sembunyi khusus POV HP */
 .show-nav {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
-
 .hide-nav {
   transform: translateX(-50%) translateY(-12px);
   opacity: 0;
@@ -110,39 +112,119 @@ a {
 
 
 /* ==========================================================================
-   2. MEDIA QUERY: KHUSUS UNTUK POV PC / DESKTOP (Lebar Layar > 720px)
+   2. MEDIA QUERY: KHUSUS UNTUK POV PC / DESKTOP (Layar > 720px) - ALA APPLE
    ========================================================================== */
 @media (min-width: 721px) {
   .nav-container {
-    top: 0;                 /* Tempel ke paling atas monitor */
-    left: 0;                /* Mulai dari ujung paling kiri */
-    transform: none;        /* MATIKAN fungsi centering milik HP */
-    width: 100%;            /* Paksa panjangnya mentok kanan 100% */
-    max-width: 100%;        /* Hapus batas lebar maksimal */
-    border-radius: 0;       /* POV PC TIDAK ADA MELENGKUNG SAMA SEKALI */
-    
-    /* Modifikasi border: Hanya garis tipis di bawah navbar */
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    height: 52px; /* Tinggi navbar PC proporsional */
+    display: flex;
+    justify-content: center; /* Menjaga kontainer konten tetap di tengah layar */
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* Animasi Muncul & Sembunyi khusus POV PC (Bebas dari gangguan translateX HP) */
+  /* WRAPPER KONTEN TENGAH - Memaksa sejajar horizontal & sinkron */
+  .nav-content {
+    display: flex !important;
+    flex-direction: row !important; /* Mencegah logo melorot ke atas teks */
+    align-items: center !important;
+    justify-content: flex-start !important; /* Berjejer rapat setelah logo */
+    width: 100%;
+    max-width: 1024px; /* Lebar maksimal area teks agar space kanan-kiri sinkron otomatis */
+    margin: 0 auto !important; 
+    padding: 0 24px;   
+    position: relative;
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap; /* Mencegah teks patah baris */
+    transform: translateX(-420px);
+  }
+
+  /* MENU BERJEJER DI SEBELAH KANAN LOGO */
+  .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
+    flex-grow: 1;
+    justify-content: center; 
+    gap: 0rem; 
+    padding-left: 0 !important; 
+  }
+  
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover {
+    color: #ffffff;
+  }
+
+  /* Pastikan tombol hamburger tersembunyi sempurna di PC */
+  .hamburger-btn {
+    display: none !important;
+  }
+
+  /* Animasi Muncul & Sembunyi PC */
   .show-nav {
     transform: translateY(0) !important;
     opacity: 1;
   }
-
   .hide-nav {
-    transform: translateY(-56px) !important; /* Sembunyi naik ke atas setinggi navbar */
+    transform: translateY(-52px) !important;
     opacity: 0;
   }
 }
 
   /* Sesuaikan animasi sembunyi/muncul khusus PC tanpa gangguan translateX */
+/* ============================================
+   NAV LINKS (MENU NAVIGASI DESKTOP)
+   ============================================ */
 .nav-links {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  
+  /* 1. MATIKAN POSISI ABSOLUT (Agar bisa menyebar alami) */
+  position: static;
+  transform: none;
+  
+  /* 2. BERIKAN EFEK GROW (Memaksa area menu mengambil sisa ruang navbar) */
+  flex-grow: 1;
+  
+  /* 3. ATUR SEBARAN JARAK ANTAR MENU */
+  /* space-evenly akan memberi jarak yang sama rata di kanan-kiri setiap teks */
+  justify-content: space-evenly; 
+  
+  /* Jarak batas suci agar menu tidak terlalu mepet dengan logo kiri & tombol/ujung kanan */
+  padding: 0 60px; 
+}
+
+/* Sembunyikan menu desktop ini saat di layar HP */
+@media (max-width: 720px) {
+  .nav-links {
+    display: none;
+  }
 }
 
 .nav-links a {

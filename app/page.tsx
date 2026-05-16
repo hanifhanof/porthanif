@@ -59,34 +59,37 @@ export default function Home() {
   return (
     <main className="portfolio-page">    
       {/* NAVBAR CONTAINER */}
-      <nav className={`nav-container ${showNavbar ? "show-nav" : "hide-nav"}`}>
-        <div className="nav-logo">
-          <a href="#hero">Rizqhnif</a>
-        </div>
+<nav className={`nav-container ${showNavbar ? "show-nav" : "hide-nav"}`}>
+  <div className="nav-content">
+    
+    <div className="nav-logo">
+      <a href="#hero">Rizqhnif</a>
+    </div>
 
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#work">Experience</a>
-          <a href="#project">Project</a>
-          <a href="#contact">Contact</a>
-        </div>
+    <div className="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#contact">Contact</a>
+    </div>
 
-        {/* Tombol Hamburger dengan onClick yang dipaksa stop propagation */}
-        <button 
-          className="hamburger-btn"
-          onClick={(e) => {
-            e.stopPropagation(); // Mencegah interupsi klik dari luar
-            setMenuOpen(!menuOpen);
-          }}
-          aria-expanded={menuOpen}
-          aria-label="Toggle mobile menu"
-          aria-controls="mobile-menu"
-        >
-          <span className="hamburger-bar bar-1"></span>
-          <span className="hamburger-bar bar-2"></span>
-          <span className="hamburger-bar bar-3"></span>
-        </button>
-      </nav>
+    <button 
+      className="hamburger-btn"
+      onClick={(e) => {
+        e.stopPropagation();
+        setMenuOpen(!menuOpen);
+      }}
+      aria-expanded={menuOpen}
+      aria-label="Toggle mobile menu"
+      aria-controls="mobile-menu"
+    >
+      <span className="hamburger-bar bar-1"></span>
+      <span className="hamburger-bar bar-2"></span>
+      <span className="hamburger-bar bar-3"></span>
+    </button>
+
+  </div>
+</nav>
 
       {/* OVERLAY MENU MOBILE */}
       <div 
@@ -120,9 +123,6 @@ export default function Home() {
             <ShinyText text="Hello, I'm Hanif!" />
           </h1>
           <p className="namaku-role">Cybersecurity Enthusiast & Digital Creator</p>
-          <p className="namaku-desc">
-            Exploring cybersecurity while creating engaging digital content.
-          </p>
         </div>
       </section>
 
