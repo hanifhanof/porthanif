@@ -321,24 +321,72 @@ a {
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+  max-width: 1200px; /* Batasi lebar grid agar tidak terlalu lebar di layar PC */
+  margin: 0 auto;    /* Posisikan grid di tengah halaman */
 }
 
 .experience-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 28px;
-  padding: 1rem;
+  padding: 1.25rem;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), 
+              background-color 0.4s ease, 
+              box-shadow 0.4s ease;
   overflow: hidden;
-  max-width: 320px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  outline: none;
 }
 
-.experience-image {
+.experience-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.experience-card:active {
+  transform: scale(0.96);
+  transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.experience-dialog {
+  background: rgba(11, 11, 12, 0.8) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  color: white;
+  padding: 1.5rem;
+  animation: applePop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes applePop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+.experience-logo {
   width: 100%;
-  height: 220px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 20px;
   display: block;
@@ -346,6 +394,7 @@ a {
 
 .experience-info {
   padding: 1rem 0.5rem 0.3rem;
+  width: 100%;
 }
 
 .experience-info h3 {
@@ -370,7 +419,7 @@ a {
 
 .dialog-image {
   width: 100%;
-  height: 220px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 1.2rem;
@@ -599,8 +648,9 @@ body.menu-open {
   .hero-stack {
     order: 1;
     align-self: center;
-    transform: translateY(-4vh);
+    transform: translate(-15px, -2vh);
     max-width: 100%;
+    margin: 0 auto;
   }
 
   .hero-portrait {

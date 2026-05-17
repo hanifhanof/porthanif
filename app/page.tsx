@@ -143,6 +143,7 @@ export default function Home() {
         <h2 className="experience-title">Experience</h2>
 
         <div className="experience-grid">
+          {/* Item 1 */}
           <Dialog>
             <DialogTrigger asChild>
               <motion.div
@@ -152,7 +153,7 @@ export default function Home() {
               >
                 <img
                   src="/lawson.png"
-                  alt="OverTheWire Logo"
+                  alt="Experience Logo"
                   className="experience-logo"
                 />
                 <div className="experience-info">
@@ -174,6 +175,117 @@ export default function Home() {
                 </DialogTitle>
                 <DialogDescription className="dialog-description">
                   I have been exploring cybersecurity through platforms such as OverTheWire and CTF challenges to strengthen my understanding of Linux fundamentals, security concepts, and problem solving through hands-on practice.
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
+          {/* Item 2 */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+                className="experience-card"
+              >
+                <img
+                  src="/lawson.png"
+                  alt="Experience Logo"
+                  className="experience-logo"
+                />
+                <div className="experience-info">
+                  <h3>Experience Title 2</h3>
+                  <p>Company / Role Name</p>
+                </div>
+              </motion.div>
+            </DialogTrigger>
+
+            <DialogContent className="experience-dialog">
+              <img
+                src="/lawson.png"
+                alt="Experience"
+                className="dialog-image"
+              />
+              <DialogHeader>
+                <DialogTitle className="dialog-title">
+                  Experience Title 2
+                </DialogTitle>
+                <DialogDescription className="dialog-description">
+                  Add your detailed description for the second experience here.
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
+          {/* Item 3 */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+                className="experience-card"
+              >
+                <img
+                  src="/lawson.png"
+                  alt="Experience Logo"
+                  className="experience-logo"
+                />
+                <div className="experience-info">
+                  <h3>Experience Title 3</h3>
+                  <p>Company / Role Name</p>
+                </div>
+              </motion.div>
+            </DialogTrigger>
+
+            <DialogContent className="experience-dialog">
+              <img
+                src="/lawson.png"
+                alt="Experience"
+                className="dialog-image"
+              />
+              <DialogHeader>
+                <DialogTitle className="dialog-title">
+                  Experience Title 3
+                </DialogTitle>
+                <DialogDescription className="dialog-description">
+                  Add your detailed description for the third experience here.
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
+          {/* Item 4 */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+                className="experience-card"
+              >
+                <img
+                  src="/lawson.png"
+                  alt="Experience Logo"
+                  className="experience-logo"
+                />
+                <div className="experience-info">
+                  <h3>Experience Title 4</h3>
+                  <p>Company / Role Name</p>
+                </div>
+              </motion.div>
+            </DialogTrigger>
+
+            <DialogContent className="experience-dialog">
+              <img
+                src="/lawson.png"
+                alt="Experience"
+                className="dialog-image"
+              />
+              <DialogHeader>
+                <DialogTitle className="dialog-title">
+                  Experience Title 4
+                </DialogTitle>
+                <DialogDescription className="dialog-description">
+                  Add your detailed description for the fourth experience here.
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
