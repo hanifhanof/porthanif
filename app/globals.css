@@ -316,9 +316,11 @@ a {
 
 .about-img {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 3/3; /* Mengubah rasio agar lebih memanjang ke bawah sesuai foto asli */
   object-fit: cover;
+  object-position: center 20%; /* Menggeser posisi fokus ke atas agar kepala tidak terpotong */
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .about-image-wrapper:hover .about-img {
