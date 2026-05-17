@@ -19,6 +19,42 @@ export default function Home() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Data Experience - Silakan ganti gambar, judul, dan deskripsi di sini
+  const experiences = [
+    {
+      id: 1,
+      title: "Pradita Future Expert",
+      role: "Video Content Competition",
+      thumbnail: "juara-rame.png",
+      images: ["juara-rame.png", "/juara.png"], // Tambahkan banyak path gambar di sini
+      description: "I have been exploring cybersecurity through platforms such as OverTheWire and CTF challenges to strengthen my understanding of Linux fundamentals, security concepts, and problem solving through hands-on practice."
+    },
+    {
+      id: 2,
+      title: "DIGIFEST 2025",
+      role: "",
+      thumbnail: "/digifest-1.png",
+      images: ["/digifest-1.png", "/digifest-2.png", "/digifest-3.png"], // Tambahkan banyak path gambar di sini
+      description: "Add your detailed description for the second experience here."
+    },
+    {
+      id: 3,
+      title: "Experience Title 3",
+      role: "Company / Role Name",
+      thumbnail: "/arya-1.png",
+      images: ["/arya-1.png", "/arya-3.png", "/arya-2.png"], // Tambahkan banyak path gambar di sini
+      description: "Add your detailed description for the third experience here."
+    },
+    {
+      id: 4,
+      title: "Experience Title 4",
+      role: "Company / Role Name",
+      thumbnail: "/lawson.png",
+      images: ["/lawson.png"],
+      description: "Add your detailed description for the fourth experience here."
+    }
+  ];
+
   // Animation variants for Apple-like reveal
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
@@ -165,9 +201,9 @@ export default function Home() {
       <section className="experience-section" id="work">
         <h2 className="experience-title">Experience</h2>
         <div className="experience-grid">
-          {[1, 2, 3, 4].map((item, index) => (
+          {experiences.map((exp, index) => (
             <motion.div
-              key={item}
+              key={exp.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -181,24 +217,25 @@ export default function Home() {
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className="experience-card"
                   >
-                    <img src="/lawson.png" alt="Logo" className="experience-logo" />
+                    <img src={exp.thumbnail} alt={exp.title} className="experience-logo" />
                     <div className="experience-info">
-                      <h3>{index === 0 ? "Cybersecurity Learning" : `Experience Title ${item}`}</h3>
-                      <p>{index === 0 ? "OverTheWire & CTF Practice" : "Company / Role Name"}</p>
+                      <h3>{exp.title}</h3>
+                      <p>{exp.role}</p>
                     </div>
                   </motion.div>
                 </DialogTrigger>
                 <DialogContent className="experience-dialog">
-                  <img src="/lawson.png" alt="Experience" className="dialog-image" />
+                  <div className="dialog-carousel">
+                    {exp.images.map((img, idx) => (
+                      <img key={idx} src={img} alt={`${exp.title} ${idx}`} className="dialog-image" />
+                    ))}
+                  </div>
                   <DialogHeader>
                     <DialogTitle className="dialog-title">
-                      {index === 0 ? "Cybersecurity Learning" : `Experience Title ${item}`}
+                      {exp.title}
                     </DialogTitle>
                     <DialogDescription className="dialog-description">
-                      {index === 0 
-                        ? "I have been exploring cybersecurity through platforms such as OverTheWire and CTF challenges to strengthen my understanding of Linux fundamentals, security concepts, and problem solving through hands-on practice."
-                        : `Add your detailed description for experience ${item} here.`
-                      }
+                      {exp.description}
                     </DialogDescription>
                   </DialogHeader>
                 </DialogContent>

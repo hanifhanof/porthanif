@@ -476,6 +476,37 @@ a {
   color: white;
   padding: 1.5rem;
   animation: applePop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 90vw;
+  width: 500px;
+}
+
+.dialog-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  margin-bottom: 1.2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.dialog-carousel:active {
+  cursor: grabbing;
+}
+
+.dialog-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.dialog-carousel .dialog-image {
+  flex: 0 0 100%;
+  scroll-snap-align: center; /* Mengunci tepat di tengah */
+  margin-bottom: 0;
+  border-radius: 20px;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 @keyframes applePop {
