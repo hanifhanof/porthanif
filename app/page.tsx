@@ -225,10 +225,17 @@ export default function Home() {
                   </motion.div>
                 </DialogTrigger>
                 <DialogContent className="experience-dialog">
-                  <div className="dialog-carousel">
-                    {exp.images.map((img, idx) => (
-                      <img key={idx} src={img} alt={`${exp.title} ${idx}`} className="dialog-image" />
-                    ))}
+                  <div className="dialog-carousel-container">
+                    <div className="dialog-carousel">
+                      {exp.images.map((img, idx) => (
+                        <img key={idx} src={img} alt={`${exp.title} ${idx}`} className="dialog-image" />
+                      ))}
+                    </div>
+                    {exp.images.length > 1 && (
+                      <div className="carousel-indicator">
+                        <span>&rsaquo; swipe to see more</span>
+                      </div>
+                    )}
                   </div>
                   <DialogHeader>
                     <DialogTitle className="dialog-title">

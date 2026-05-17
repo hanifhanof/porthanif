@@ -480,6 +480,27 @@ a {
   width: 500px;
 }
 
+.dialog-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-indicator {
+  margin-top: -8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.carousel-indicator span {
+  display: inline-block;
+}
+
+
 .dialog-carousel {
   display: flex;
   overflow-x: auto;
