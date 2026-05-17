@@ -127,15 +127,46 @@ export default function Home() {
       </section>
 
       {/* SEKSI ABOUT */}
-      <section className="about-section">
-        <ScrollReveal
-          baseOpacity={0.9}
-          enableBlur
-          baseRotation={5}
-          blurStrength={9}
-        >
-          I’m Hanif, an Information Technology student passionate about technology, creativity, and continuous learning. I was initially interested in visual design, but recently I’ve become more interested in cybersecurity and exploring how systems work behind the scenes. I enjoy learning through hands-on experiences such as building projects, practicing Linux fundamentals, and exploring cybersecurity challenges. I aim to grow as a developer who combines creativity, curiosity, and problem solving to create simple and meaningful digital experiences.
-        </ScrollReveal>
+      <section className="about-section" id="about">
+        <div className="about-container">
+          <div className="about-visual">
+            <div className="about-image-wrapper">
+              <img 
+                src="/hanif-about.png" 
+                alt="Hanif Portrait" 
+                className="about-img"
+              />
+              <div className="about-status-tag">
+                <span className="status-dot"></span>
+                Open for Collaboration
+              </div>
+            </div>
+            
+            {/* Additional "Interest" or "Tech" card below photo */}
+            <div className="about-mini-card">
+              <h4>Tech Stack</h4>
+              <div className="tech-tags">
+                <span>Linux</span>
+                <span>Next.js</span>
+                <span>CyberSec</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-content">
+            <h2 className="section-label">About Me</h2>
+            <div className="about-text">
+              <ScrollReveal
+                baseOpacity={0.5}
+                enableBlur
+                baseRotation={0}
+                blurStrength={10}
+              >
+                I’m Hanif, an Information Technology student passionate about technology, creativity, and continuous learning. I was initially interested in visual design, but recently I’ve become more interested in cybersecurity and exploring how systems work behind the scenes. I enjoy learning through hands-on experiences such as building projects, practicing Linux fundamentals, and exploring cybersecurity challenges. I aim to grow as a developer who combines creativity, curiosity, and problem solving to create simple and meaningful digital experiences.
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* SEKSI EXPERIENCE */}
