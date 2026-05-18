@@ -365,7 +365,6 @@ export default function Home() {
                 backgroundPosition: 'center',
               }}
             >
-              <div className="category-icon">{category.icon}</div>
               <div className="category-content">
                 <h3>{category.title}</h3>
                 <p>{category.description}</p>
