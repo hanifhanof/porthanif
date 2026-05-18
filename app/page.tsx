@@ -18,6 +18,91 @@ export default function Home() {
   const [introDone, setIntroDone] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
+
+  // Project Categories Data
+  const projectCategories = [
+    {
+      id: 'campus',
+      title: 'Projects on Campus',
+      description: 'Academic coursework and assignments',
+      bgImage: '/pradita-university.png', // Silakan ganti dengan nama file gambar Anda di folder public
+      subcategories: [
+        {
+          id: 'pancasila',
+          title: 'Pancasila Course Project',
+          projects: [
+            { name: 'Civic Research Paper', description: 'In-depth analysis on Indonesian governance' },
+            { name: 'Documentary Creation', description: '15-minute educational video' }
+          ]
+        },
+        {
+          id: 'data-structure',
+          title: 'Data Structures & Algorithms',
+          projects: [
+            { name: 'Binary Search Tree Implementation', description: 'C++ implementation with visualization' },
+            { name: 'Graph Algorithm Solver', description: 'Dijkstra and BFS implementations' }
+          ]
+        },
+        {
+          id: 'web-dev',
+          title: 'Web Development',
+          projects: [
+            { name: 'E-commerce Platform', description: 'Full-stack project using Next.js' },
+            { name: 'Real-time Chat App', description: 'WebSocket implementation' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'coursera',
+      title: 'Projects on Coursera',
+      description: 'Professional certifications and courses',
+      bgImage: '/coursera.png', // Silakan ganti dengan nama file gambar Anda di folder public
+      subcategories: [
+        {
+          id: 'cybersecurity',
+          title: 'Cybersecurity Specialization',
+          projects: [
+            { name: 'Network Security Analysis', description: 'Packet analysis and threat detection' },
+            { name: 'Cryptography Fundamentals', description: 'Encryption algorithm implementations' }
+          ]
+        },
+        {
+          id: 'cloud-computing',
+          title: 'Cloud Computing Essentials',
+          projects: [
+            { name: 'AWS Infrastructure Setup', description: 'Scalable web application deployment' },
+            { name: 'Docker Containerization', description: 'Multi-container application orchestration' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'personal',
+      title: 'My Personal Projects',
+      description: 'Self-initiated and passion projects',
+      subcategories: [
+        {
+          id: 'portfolio',
+          title: 'This Portfolio Website',
+          projects: [
+            { name: 'Interactive Design System', description: 'Custom UI components with animations' },
+            { name: 'Performance Optimization', description: 'Optimized for speed and accessibility' }
+          ]
+        },
+        {
+          id: 'open-source',
+          title: 'Open Source Contributions',
+          projects: [
+            { name: 'Security Auditing Tool', description: 'CLI tool for vulnerability scanning' },
+            { name: 'React Component Library', description: 'Reusable UI component collection' }
+          ]
+        }
+      ]
+    }
+  ];
 
   // Data Experience - Silakan ganti gambar, judul, dan deskripsi di sini
   const experiences = [
@@ -47,10 +132,10 @@ export default function Home() {
     },
     {
       id: 4,
-      title: "Experience Title 4",
-      role: "Company / Role Name",
-      thumbnail: "/lawson.png",
-      images: ["/lawson.png"],
+      title: "bluAmbassador",
+      role: "BCA Digital",
+      thumbnail: "/bluAmbassador.png",
+      images: ["/bluAmbassador.png", "/bluAmbassador-2.png"], // Tambahkan banyak path gambar di sini
       description: "Add your detailed description for the fourth experience here."
     }
   ];
@@ -256,6 +341,156 @@ export default function Home() {
           ))}
         </div>
       </section>
+      {/* SEKSI PROJECT */}
+      <section className="project-section" id="project">
+        <h2 className="experience-title">Projects</h2>
+        
+        {/* Main Category Cards */}
+        <div className="project-categories">
+          {projectCategories.map((category) => (
+            <motion.div
+              key={category.id}
+              className="project-category-card"
+              onClick={() => setSelectedCategory(category.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{
+                backgroundImage: category.bgImage 
+                  ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${category.bgImage})`
+                  : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="category-icon">{category.icon}</div>
+              <div className="category-content">
+                <h3>{category.title}</h3>
+                <p>{category.description}</p>
+              </div>
+              <div className="category-arrow">→</div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Subcategories Modal */}
+      {selectedCategory && (
+        <motion.div
+          className="project-modal-overlay"
+          onClick={() => setSelectedCategory(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="project-modal"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+          >
+            <button 
+              className="modal-close-btn"
+              onClick={() => setSelectedCategory(null)}
+            >
+              ✕
+            </button>
+            
+            <h2>{projectCategories.find(c => c.id === selectedCategory)?.title}</h2>
+            
+            <div className="subcategories-list">
+              {projectCategories
+                .find(c => c.id === selectedCategory)
+                ?.subcategories.map((subcat) => (
+                <motion.div
+                  key={subcat.id}
+                  className="subcategory-item"
+                  onClick={() => setSelectedSubCategory(subcat.id)}
+                  whileHover={{ x: 8 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                >
+                  <h3>{subcat.title}</h3>
+                  <p>{subcat.projects.length} projects</p>
+                  <div className="item-arrow">→</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {/* Projects Detail Modal */}
+      {selectedCategory && selectedSubCategory && (
+        <motion.div
+          className="project-modal-overlay"
+          onClick={() => setSelectedSubCategory(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="project-modal"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+          >
+            <button 
+              className="modal-close-btn"
+              onClick={() => setSelectedSubCategory(null)}
+            >
+              ✕
+            </button>
+            
+            <button
+              className="modal-back-btn"
+              onClick={() => setSelectedSubCategory(null)}
+            >
+              ← Back
+            </button>
+            
+            <h2>
+              {projectCategories
+                .find(c => c.id === selectedCategory)
+                ?.subcategories.find(s => s.id === selectedSubCategory)?.title}
+            </h2>
+            
+            <div className="projects-list">
+              {projectCategories
+                .find(c => c.id === selectedCategory)
+                ?.subcategories.find(s => s.id === selectedSubCategory)
+                ?.projects.map((project, idx) => (
+                <motion.div
+                  key={idx}
+                  className="project-item"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <h4>{project.name}</h4>
+                  <p>{project.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {/* CONTACT SECTION */}
+      <section className="experience-section" id="contact">
+        <h2 className="experience-title">Get in Touch</h2>
+        <div className="text-center">
+          <p className="text-xl text-gray-400 mb-8">Have a project in mind or just want to chat?</p>
+          <a href="mailto:your-email@example.com" className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors">
+            Say Hello
+          </a>
+        </div>
+      </section>
+
     </main>
   );
 }
