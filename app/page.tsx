@@ -189,7 +189,12 @@ export default function Home() {
           <div className="about-content">
             <h2 className="section-label">About Me</h2>
             <div className="about-text">
-              <ScrollReveal baseOpacity={0.2} enableBlur blurStrength={10}>
+              <ScrollReveal 
+                baseOpacity={0.2} 
+                enableBlur 
+                blurStrength={10}
+                textClassName="text-xs tracking-tight md:text-lg md:tracking-wide"
+              >
                 Welcome to my personal website! I'm Muhammad Rizqi Hanif, an IT student dedicated to continuous learning, structured problem-solving, and digital innovation. My tech journey started with a fascination for UI/UX, but as I explored deeper, I found my true passion in Cybersecurity. I love the challenge of dissecting complex systems, understanding how they function under the hood, and learning how to keep them secure. Currently, I am actively sharpening my knowledge through cybersecurity professional courses on Coursera. Whenever I encounter complex bugs or get stuck on a technical roadblock, my immediate instinct is to research deeply, leverage AI tools responsibly, and experiment until the problem is solved.
               </ScrollReveal>
             </div>
