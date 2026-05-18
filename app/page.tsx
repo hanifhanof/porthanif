@@ -232,7 +232,7 @@ export default function Home() {
           <h1 className="namaku-title">
             <ShinyText text="Hello, I'm Hanif!" />
           </h1>
-Le          <p className="namaku-role">Cybersecurity Learner & Digital Creator</p>
+          <p className="namaku-role">Cybersecurity Learner & Digital Creator</p>
         </div>
       </section>
 
