@@ -65,20 +65,23 @@ export default function Home() {
         {
           id: 'pancasila',
           title: 'Pancasila Course Project',
-          description: 'Project ini berfokus pada penerapan nilai-nilai Pancasila di lingkungan kampus melalui riset, wawancara, dan penyajian materi visual. Output utamanya berupa proposal riset, video wawancara, serta video grafis sebagai media edukasi.',
+          description: 'Proyek studi kasus kelompok yang menganalisis fenomena radikalisme digital dan stereotipe agama pada platform TikTok. Menggunakan nilai-nilai Pancasila sebagai kerangka etika, proyek ini merumuskan strategi literasi digital kritis dan merancang prototipe kampanye edukasi bertema "Saring Sebelum Sharing" guna mendorong ruang digital yang lebih toleran dan sehat.',
           projects: [
             {
               name: 'Proposal Project',
+              bgImage: '/proposal.png',
               description: 'Dokumen proposal lengkap (PDF/Drive).',
               href: 'https://docs.google.com/document/d/1CP1GpujhF6zESEUAGwNOq-an_54TS6q1HiyTW0FVazQ/edit?tab=t.0'
             },
             {
               name: 'YouTube Wawancara',
+              bgImage: '/wawancara.png',
               description: 'Video wawancara narasumber terkait isu kampus.',
               href: 'https://youtu.be/C29ctHWANA8?si=Ya9W1N6ToK03ckpJ'
             },
             {
               name: 'YouTube Video Grafis',
+              bgImage: '/vidiografis.png',
               description: 'Visualisasi grafis untuk rangkuman hasil riset.',
               href: 'https://youtu.be/HhcY3ht6SIY?si=orZx922WLYydhLed'
             }
