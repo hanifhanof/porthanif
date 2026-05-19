@@ -24,6 +24,18 @@ export default function Home() {
   // Project Categories Data
   const projectCategories = [
     {
+      id: 'personal',
+      title: 'My Personal Projects',
+      description: 'Maintenance',
+      subcategories: [
+        {
+          id: 'maintenance',
+          title: 'Maintenance',
+          projects: []
+        }
+      ]
+    },
+    {
       id: 'campus',
       title: 'Projects on Campus',
       description: 'Academic coursework and assignments',
@@ -32,9 +44,23 @@ export default function Home() {
         {
           id: 'pancasila',
           title: 'Pancasila Course Project',
+          description: 'Project ini berfokus pada penerapan nilai-nilai Pancasila di lingkungan kampus melalui riset, wawancara, dan penyajian materi visual. Output utamanya berupa proposal riset, video wawancara, serta video grafis sebagai media edukasi.',
           projects: [
-            { name: 'Civic Research Paper', description: 'In-depth analysis on Indonesian governance' },
-            { name: 'Documentary Creation', description: '15-minute educational video' }
+            {
+              name: 'Proposal Project',
+              description: 'Dokumen proposal lengkap (PDF/Drive).',
+              href: 'https://docs.google.com/document/d/1CP1GpujhF6zESEUAGwNOq-an_54TS6q1HiyTW0FVazQ/edit?tab=t.0'
+            },
+            {
+              name: 'YouTube Wawancara',
+              description: 'Video wawancara narasumber terkait isu kampus.',
+              href: 'https://youtu.be/C29ctHWANA8?si=Ya9W1N6ToK03ckpJ'
+            },
+            {
+              name: 'YouTube Video Grafis',
+              description: 'Visualisasi grafis untuk rangkuman hasil riset.',
+              href: 'https://youtu.be/HhcY3ht6SIY?si=orZx922WLYydhLed'
+            }
           ]
         },
         {
@@ -51,53 +77,6 @@ export default function Home() {
           projects: [
             { name: 'E-commerce Platform', description: 'Full-stack project using Next.js' },
             { name: 'Real-time Chat App', description: 'WebSocket implementation' }
-          ]
-        }
-      ]
-    },
-    {
-      id: 'coursera',
-      title: 'Projects on Coursera',
-      description: 'Professional certifications and courses',
-      bgImage: '/coursera.png', // Silakan ganti dengan nama file gambar Anda di folder public
-      subcategories: [
-        {
-          id: 'cybersecurity',
-          title: 'Cybersecurity Specialization',
-          projects: [
-            { name: 'Network Security Analysis', description: 'Packet analysis and threat detection' },
-            { name: 'Cryptography Fundamentals', description: 'Encryption algorithm implementations' }
-          ]
-        },
-        {
-          id: 'cloud-computing',
-          title: 'Cloud Computing Essentials',
-          projects: [
-            { name: 'AWS Infrastructure Setup', description: 'Scalable web application deployment' },
-            { name: 'Docker Containerization', description: 'Multi-container application orchestration' }
-          ]
-        }
-      ]
-    },
-    {
-      id: 'personal',
-      title: 'My Personal Projects',
-      description: 'Self-initiated and passion projects',
-      subcategories: [
-        {
-          id: 'portfolio',
-          title: 'This Portfolio Website',
-          projects: [
-            { name: 'Interactive Design System', description: 'Custom UI components with animations' },
-            { name: 'Performance Optimization', description: 'Optimized for speed and accessibility' }
-          ]
-        },
-        {
-          id: 'open-source',
-          title: 'Open Source Contributions',
-          projects: [
-            { name: 'Security Auditing Tool', description: 'CLI tool for vulnerability scanning' },
-            { name: 'React Component Library', description: 'Reusable UI component collection' }
           ]
         }
       ]
@@ -124,7 +103,7 @@ export default function Home() {
     },
     {
       id: 3,
-      title: "Experience Title 3",
+      title: "INDOCOMTECH",
       role: "Company / Role Name",
       thumbnail: "/arya-1.png",
       images: ["/arya-1.png", "/arya-3.png", "/arya-2.png"], // Tambahkan banyak path gambar di sini
@@ -174,6 +153,11 @@ export default function Home() {
     }
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
+
+  const selectedCategoryData = projectCategories.find((category) => category.id === selectedCategory);
+  const selectedSubCategoryData = selectedCategoryData?.subcategories.find(
+    (subcategory) => subcategory.id === selectedSubCategory
+  );
 
   return (
     <main className="portfolio-page">    
@@ -278,7 +262,7 @@ export default function Home() {
                 baseOpacity={0.2} 
                 enableBlur 
                 blurStrength={10}
-                textClassName="text-xs tracking-tight md:text-lg md:tracking-wide"
+                textClassName="text-base tracking-tight md:text-lg md:tracking-wide"
               >
                 Welcome to my personal website! I'm Muhammad Rizqi Hanif, an IT student dedicated to continuous learning, structured problem-solving, and digital innovation. My tech journey started with a fascination for UI/UX, but as I explored deeper, I found my true passion in Cybersecurity. I love the challenge of dissecting complex systems, understanding how they function under the hood, and learning how to keep them secure. Currently, I am actively sharpening my knowledge through cybersecurity professional courses on Coursera. Whenever I encounter complex bugs or get stuck on a technical roadblock, my immediate instinct is to research deeply, leverage AI tools responsibly, and experiment until the problem is solved.
               </ScrollReveal>
@@ -452,28 +436,49 @@ export default function Home() {
               ← Back
             </button>
             
-            <h2>
-              {projectCategories
-                .find(c => c.id === selectedCategory)
-                ?.subcategories.find(s => s.id === selectedSubCategory)?.title}
-            </h2>
-            
-            <div className="projects-list">
-              {projectCategories
-                .find(c => c.id === selectedCategory)
-                ?.subcategories.find(s => s.id === selectedSubCategory)
-                ?.projects.map((project, idx) => (
-                <motion.div
-                  key={idx}
-                  className="project-item"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <h4>{project.name}</h4>
-                  <p>{project.description}</p>
-                </motion.div>
-              ))}
+            <h2>{selectedSubCategoryData?.title}</h2>
+
+            <div
+              className={`project-detail-scroll ${
+                selectedSubCategoryData?.id === "pancasila" ? "is-scrollable" : ""
+              }`}
+            >
+              {selectedSubCategoryData?.description && (
+                <p className="subcategory-description">
+                  {selectedSubCategoryData.description}
+                </p>
+              )}
+
+              <div className="projects-list">
+                {selectedSubCategoryData?.projects.map((project, idx) =>
+                  project.href ? (
+                    <motion.a
+                      key={idx}
+                      className="project-item project-item-link"
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                    >
+                      <h4>{project.name}</h4>
+                      <p>{project.description}</p>
+                    </motion.a>
+                  ) : (
+                    <motion.div
+                      key={idx}
+                      className="project-item"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                    >
+                      <h4>{project.name}</h4>
+                      <p>{project.description}</p>
+                    </motion.div>
+                  )
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>
