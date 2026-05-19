@@ -69,19 +69,16 @@ export default function Home() {
           projects: [
             {
               name: 'Proposal Project',
-              bgImage: '/proposal.png',
               description: 'Dokumen proposal lengkap (PDF/Drive).',
               href: 'https://docs.google.com/document/d/1CP1GpujhF6zESEUAGwNOq-an_54TS6q1HiyTW0FVazQ/edit?tab=t.0'
             },
             {
               name: 'YouTube Wawancara',
-              bgImage: '/wawancara.png',
               description: 'Video wawancara narasumber terkait isu kampus.',
               href: 'https://youtu.be/C29ctHWANA8?si=Ya9W1N6ToK03ckpJ'
             },
             {
               name: 'YouTube Video Grafis',
-              bgImage: '/vidiografis.png',
               description: 'Visualisasi grafis untuk rangkuman hasil riset.',
               href: 'https://youtu.be/HhcY3ht6SIY?si=orZx922WLYydhLed'
             }
