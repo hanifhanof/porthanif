@@ -14,6 +14,27 @@ import {
 
 import { motion, Variants } from "motion/react";
 
+type ProjectItem = {
+  name: string;
+  description: string;
+  href?: string;
+};
+
+type Subcategory = {
+  id: string;
+  title: string;
+  description?: string;
+  projects: ProjectItem[];
+};
+
+type ProjectCategory = {
+  id: string;
+  title: string;
+  description: string;
+  bgImage?: string;
+  subcategories: Subcategory[];
+};
+
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
@@ -22,7 +43,7 @@ export default function Home() {
   const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
 
   // Project Categories Data
-  const projectCategories = [
+  const projectCategories: ProjectCategory[] = [
     {
       id: 'personal',
       title: 'My Personal Projects',
