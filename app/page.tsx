@@ -92,11 +92,14 @@ export default function Home() {
           ]
         },
         {
-          id: 'data-structure',
-          title: 'Data Structures & Algorithms',
+          id: 'Struktur Data',
+          title: 'Struktur Data',
+          description: 'Proyek kelompok yang membuat suatu contoh website yang menerapkan konsep Linked List. Kelompok kami membuat spotify clone untuk visualisasi yang menerapkan konsep linked list untuk mengelola playlist lagu, di mana setiap lagu direpresentasikan sebagai node dalam linked list, memungkinkan pengguna untuk menambahkan, menghapus, dan mengurutkan lagu dalam playlist secara dinamis.',
           projects: [
-            { name: 'Binary Search Tree Implementation', description: 'C++ implementation with visualization' },
-            { name: 'Graph Algorithm Solver', description: 'Dijkstra and BFS implementations' }
+            { name: 'Linked List Project',
+              description: 'My implementation of a linked list data structure',
+              href: 'https://struktur-data-eight.vercel.app'
+            },  
           ]
         },
         {
@@ -335,28 +338,24 @@ export default function Home() {
       <section className="experience-section" id="work">
         <h2 className="experience-title">Experience</h2>
         <div className="experience-grid">
-          {experiences.map((exp, index) => (
+          {experiences.map((exp) => (
             <motion.div
               key={exp.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: index * 0.15, ease: [0.2, 0, 0.2, 1] }}
+              transition={{ duration: 0.35, ease: [0.2, 0, 0.2, 1] }}
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="experience-card"
-                  >
+                  <div className="experience-card">
+
                     <img src={exp.thumbnail} alt={exp.title} className="experience-logo" />
                     <div className="experience-info">
                       <h3>{exp.title}</h3>
                       <p>{exp.role}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 </DialogTrigger>
                 <DialogContent className="experience-dialog">
                   <div className="dialog-carousel-container">
@@ -428,12 +427,9 @@ export default function Home() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div
+          <div
             className="project-modal"
             onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
           >
             <button 
               className="modal-close-btn"
@@ -450,16 +446,16 @@ export default function Home() {
               onItemSelect={(subcategory) => setSelectedSubCategory(subcategory.id)}
               getItemLabel={(subcategory) => subcategory.title}
               renderItem={(subcategory) => (
-                <motion.div className="subcategory-item" whileHover={{ x: 8 }}>
+                <div className="subcategory-item">
                   <div>
                     <h3>{subcategory.title}</h3>
                     <p>{subcategory.projects.length} projects</p>
                   </div>
                   <div className="item-arrow">→</div>
-                </motion.div>
+                </div>
               )}
             />
-          </motion.div>
+          </div>
         </motion.div>
       )}
 
@@ -472,12 +468,9 @@ export default function Home() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div
+          <div
             className="project-modal"
             onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
           >
             <button 
               className="modal-close-btn"
@@ -537,7 +530,7 @@ export default function Home() {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       )}
 

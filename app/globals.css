@@ -595,6 +595,34 @@ a {
   font-size: 1rem;
 }
 
+@media (max-width: 640px) {
+  .experience-dialog {
+    width: 92vw;
+    max-height: 85vh;
+    padding: 0.75rem;
+    overflow-y: auto;
+  }
+
+  .dialog-title {
+    font-size: 1.4rem;
+  }
+
+  .dialog-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .dialog-image {
+    border-radius: 16px;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+}
+
 .namaku {
   font-family: "Inter", sans-serif;
   order: 1;
