@@ -1074,6 +1074,15 @@ body.menu-open {
   gap: 1rem;
 }
 
+.subcategories-list.scroll-list-container {
+  width: 100%;
+}
+
+.subcategories-list .scroll-list {
+  max-height: 360px;
+  padding: 0;
+}
+
 .subcategory-item {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);

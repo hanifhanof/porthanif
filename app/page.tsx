@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import ShinyText from "@/components/ShinyText";
 import ScrollReveal from "@/components/ScrollReveal";
+import AnimatedList from "@/components/AnimatedList";
 import {
   Dialog,
   DialogContent,
@@ -64,7 +65,7 @@ export default function Home() {
       subcategories: [
         {
           id: 'pancasila',
-          title: 'Pancasila Course Project',
+          title: 'Pancasila',
           description: 'Proyek studi kasus kelompok yang menganalisis fenomena radikalisme digital dan stereotipe agama pada platform TikTok. Menggunakan nilai-nilai Pancasila sebagai kerangka etika, proyek ini merumuskan strategi literasi digital kritis dan merancang prototipe kampanye edukasi bertema "Saring Sebelum Sharing" guna mendorong ruang digital yang lebih toleran dan sehat.',
           projects: [
             {
@@ -81,6 +82,12 @@ export default function Home() {
               name: 'YouTube Video Grafis',
               description: 'Visualisasi grafis untuk rangkuman hasil riset.',
               href: 'https://youtu.be/HhcY3ht6SIY?si=orZx922WLYydhLed'
+            },
+            {
+              name: 'Laporan Analisis',
+              description: 'Description for wkakow project.',
+              href: 'https://docs.google.com/document/d/1FnoLyZSRQFb8ZD8fXEwf2-agueOWo-GT2XacSbtQGZk/edit?usp=sharing'
+
             }
           ]
         },
@@ -99,6 +106,38 @@ export default function Home() {
             { name: 'E-commerce Platform', description: 'Full-stack project using Next.js' },
             { name: 'Real-time Chat App', description: 'WebSocket implementation' }
           ]
+        },
+        {
+          id: 'cybersecurity',
+          title: 'Cybersecurity Challenges',
+          projects: [
+            { name: 'CTF Write-ups', description: 'Detailed write-ups of CTF challenges' },
+            { name: 'Vulnerability Analysis', description: 'Case studies on recent vulnerabilities' }
+          ]
+        },
+        {
+          id: 'mobile-app',
+          title: 'Mobile App Development',
+          projects: [
+            { name: 'Fitness Tracker', description: 'React Native app for tracking workouts' },
+            { name: 'Recipe App', description: 'Flutter app for sharing recipes' }
+          ]
+        },
+        {
+          id: 'machine-learning',
+          title: 'Machine Learning Projects',
+          projects: [
+            { name: 'Image Classifier', description: 'CNN model for classifying images' },
+            { name: 'Sentiment Analysis', description: 'NLP project analyzing social media sentiment' }
+          ]
+        },
+        {
+          id: 'open-source',
+          title: 'Open Source Contributions',
+          projects: [
+            { name: 'Library X', description: 'Contributed bug fixes and features' },
+            { name: 'Framework Y', description: 'Improved documentation and examples' }
+          ] 
         }
       ]
     }
@@ -128,7 +167,7 @@ export default function Home() {
       role: "Company / Role Name",
       thumbnail: "/arya-1.png",
       images: ["/arya-1.png", "/arya-3.png", "/arya-2.png"], // Tambahkan banyak path gambar di sini
-      description: "Add your detailed description for the third experience here."
+      description: "Indocomtech 2025 adalah pameran teknologi konsumen terbesar di Indonesia yang diselenggarakan oleh Yayasan Apkomindo Indonesia (YAI) bersama Satue Event. Acara ini menampilkan berbagai produk dan inovasi teknologi terbaru dari berbagai perusahaan terkemuka di industri teknologi, termasuk perangkat elektronik, gadget, perangkat lunak, dan solusi teknologi lainnya. Pada festival ini saya dan kelompok saya jadi mendapatkan ilmu baru tentang teknologi terbaru, tren industri, dan peluang kolaborasi dengan para profesional di bidang teknologi."
     },
     {
       id: 4,
@@ -285,7 +324,7 @@ export default function Home() {
                 blurStrength={10}
                 textClassName="text-base tracking-tight md:text-lg md:tracking-wide"
               >
-                Welcome to my personal website! I'm Muhammad Rizqi Hanif, an IT student dedicated to continuous learning, structured problem-solving, and digital innovation. My tech journey started with a fascination for UI/UX, but as I explored deeper, I found my true passion in Cybersecurity. I love the challenge of dissecting complex systems, understanding how they function under the hood, and learning how to keep them secure. Currently, I am actively sharpening my knowledge through cybersecurity professional courses on Coursera. Whenever I encounter complex bugs or get stuck on a technical roadblock, my immediate instinct is to research deeply, leverage AI tools responsibly, and experiment until the problem is solved.
+                Welcome to my personal website! I&apos;m Muhammad Rizqi Hanif, an IT student dedicated to continuous learning, structured problem-solving, and digital innovation. My tech journey started with a fascination for UI/UX, but as I explored deeper, I found my true passion in Cybersecurity. I love the challenge of dissecting complex systems, understanding how they function under the hood, and learning how to keep them secure. Currently, I am actively sharpening my knowledge through cybersecurity professional courses on Coursera. Whenever I encounter complex bugs or get stuck on a technical roadblock, my immediate instinct is to research deeply, leverage AI tools responsibly, and experiment until the problem is solved.
               </ScrollReveal>
             </div>
           </div>
@@ -391,7 +430,7 @@ export default function Home() {
         >
           <motion.div
             className="project-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -403,26 +442,23 @@ export default function Home() {
               ✕
             </button>
             
-            <h2>{projectCategories.find(c => c.id === selectedCategory)?.title}</h2>
+            <h2>{selectedCategoryData?.title}</h2>
             
-            <div className="subcategories-list">
-              {projectCategories
-                .find(c => c.id === selectedCategory)
-                ?.subcategories.map((subcat) => (
-                <motion.div
-                  key={subcat.id}
-                  className="subcategory-item"
-                  onClick={() => setSelectedSubCategory(subcat.id)}
-                  whileHover={{ x: 8 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                >
-                  <h3>{subcat.title}</h3>
-                  <p>{subcat.projects.length} projects</p>
+            <AnimatedList
+              className="subcategories-list"
+              items={selectedCategoryData?.subcategories ?? []}
+              onItemSelect={(subcategory) => setSelectedSubCategory(subcategory.id)}
+              getItemLabel={(subcategory) => subcategory.title}
+              renderItem={(subcategory) => (
+                <motion.div className="subcategory-item" whileHover={{ x: 8 }}>
+                  <div>
+                    <h3>{subcategory.title}</h3>
+                    <p>{subcategory.projects.length} projects</p>
+                  </div>
                   <div className="item-arrow">→</div>
                 </motion.div>
-              ))}
-            </div>
+              )}
+            />
           </motion.div>
         </motion.div>
       )}
@@ -438,7 +474,7 @@ export default function Home() {
         >
           <motion.div
             className="project-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
