@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import ShinyText from "@/components/ShinyText";
 import ScrollReveal from "@/components/ScrollReveal";
-import AnimatedList from "@/components/AnimatedList";
 import {
   Dialog,
   DialogContent,
@@ -15,136 +14,92 @@ import {
 
 import { motion, Variants } from "motion/react";
 
-type ProjectItem = {
-  name: string;
-  description: string;
-  href?: string;
-};
-
-type Subcategory = {
-  id: string;
-  title: string;
-  description?: string;
-  projects: ProjectItem[];
-};
-
-type ProjectCategory = {
-  id: string;
-  title: string;
-  description: string;
-  bgImage?: string;
-  subcategories: Subcategory[];
-};
-
 export default function Home() {
-  const [introDone, setIntroDone] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Project Categories Data
-  const projectCategories: ProjectCategory[] = [
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const allProjects = [
     {
-      id: 'personal',
-      title: 'My Personal Projects',
-      description: 'Maintenance',
-      subcategories: [
-        {
-          id: 'maintenance',
-          title: 'Maintenance',
-          projects: []
-        }
-      ]
+      title: 'YouTube Wawancara - Pancasila',
+      description: 'Video wawancara narasumber terkait isu kampus dan radikalisme digital.',
+      tags: ['YouTube', 'Interview', 'Pancasila'],
+      link: 'https://youtu.be/C29ctHWANA8'
     },
     {
-      id: 'campus',
-      title: 'Projects on Campus',
-      description: 'Academic coursework and assignments',
-      bgImage: '/pradita-university.png', // Silakan ganti dengan nama file gambar Anda di folder public
-      subcategories: [
-        {
-          id: 'pancasila',
-          title: 'Pancasila',
-          description: 'Proyek studi kasus kelompok yang menganalisis fenomena radikalisme digital dan stereotipe agama pada platform TikTok. Menggunakan nilai-nilai Pancasila sebagai kerangka etika, proyek ini merumuskan strategi literasi digital kritis dan merancang prototipe kampanye edukasi bertema "Saring Sebelum Sharing" guna mendorong ruang digital yang lebih toleran dan sehat.',
-          projects: [
-            {
-              name: 'Proposal Project',
-              description: 'Dokumen proposal lengkap (PDF/Drive).',
-              href: 'https://docs.google.com/document/d/1CP1GpujhF6zESEUAGwNOq-an_54TS6q1HiyTW0FVazQ/edit?tab=t.0'
-            },
-            {
-              name: 'YouTube Wawancara',
-              description: 'Video wawancara narasumber terkait isu kampus.',
-              href: 'https://youtu.be/C29ctHWANA8?si=Ya9W1N6ToK03ckpJ'
-            },
-            {
-              name: 'YouTube Video Grafis',
-              description: 'Visualisasi grafis untuk rangkuman hasil riset.',
-              href: 'https://youtu.be/HhcY3ht6SIY?si=orZx922WLYydhLed'
-            },
-            {
-              name: 'Laporan Analisis',
-              description: 'Description for wkakow project.',
-              href: 'https://docs.google.com/document/d/1FnoLyZSRQFb8ZD8fXEwf2-agueOWo-GT2XacSbtQGZk/edit?usp=sharing'
-
-            }
-          ]
-        },
-        {
-          id: 'Struktur Data',
-          title: 'Struktur Data',
-          description: 'Proyek kelompok yang membuat suatu contoh website yang menerapkan konsep Linked List. Kelompok kami membuat spotify clone untuk visualisasi yang menerapkan konsep linked list untuk mengelola playlist lagu, di mana setiap lagu direpresentasikan sebagai node dalam linked list, memungkinkan pengguna untuk menambahkan, menghapus, dan mengurutkan lagu dalam playlist secara dinamis.',
-          projects: [
-            { name: 'Linked List Project',
-              description: 'My implementation of a linked list data structure',
-              href: 'https://struktur-data-eight.vercel.app'
-            },  
-          ]
-        },
-        {
-          id: 'web-dev',
-          title: 'Web Development',
-          projects: [
-            { name: 'E-commerce Platform', description: 'Full-stack project using Next.js' },
-            { name: 'Real-time Chat App', description: 'WebSocket implementation' }
-          ]
-        },
-        {
-          id: 'cybersecurity',
-          title: 'Cybersecurity Challenges',
-          projects: [
-            { name: 'CTF Write-ups', description: 'Detailed write-ups of CTF challenges' },
-            { name: 'Vulnerability Analysis', description: 'Case studies on recent vulnerabilities' }
-          ]
-        },
-        {
-          id: 'mobile-app',
-          title: 'Mobile App Development',
-          projects: [
-            { name: 'Fitness Tracker', description: 'React Native app for tracking workouts' },
-            { name: 'Recipe App', description: 'Flutter app for sharing recipes' }
-          ]
-        },
-        {
-          id: 'machine-learning',
-          title: 'Machine Learning Projects',
-          projects: [
-            { name: 'Image Classifier', description: 'CNN model for classifying images' },
-            { name: 'Sentiment Analysis', description: 'NLP project analyzing social media sentiment' }
-          ]
-        },
-        {
-          id: 'open-source',
-          title: 'Open Source Contributions',
-          projects: [
-            { name: 'Library X', description: 'Contributed bug fixes and features' },
-            { name: 'Framework Y', description: 'Improved documentation and examples' }
-          ] 
-        }
-      ]
+      title: 'YouTube Video Grafis - Pancasila',
+      description: 'Visualisasi grafis untuk rangkuman hasil riset tentang stereotipe agama.',
+      tags: ['YouTube', 'Motion Graphic', 'Research'],
+      link: 'https://youtu.be/HhcY3ht6SIY'
+    },
+    {
+      title: 'Pancasila - Digital Radicalism Analysis',
+      description: 'Analyzing digital radicalism and religious stereotypes on TikTok using Pancasila values.',
+      image: '/vidiografis.png',
+      tags: ['Research', 'Ethics', 'Digital Literacy'],
+      link: 'https://docs.google.com/document/d/1FnoLyZSRQFb8ZD8fXEwf2-agueOWo-GT2XacSbtQGZk/edit?usp=sharing'
+    },
+    {
+      title: 'Spotify Clone - Linked List',
+      description: 'A Spotify-inspired web app implementing Linked List concepts for playlist management.',
+      image: '/pradita-university.png',
+      tags: ['Data Structures', 'Next.js', 'Linked List'],
+      link: 'https://struktur-data-eight.vercel.app'
+    },
+    {
+      title: 'E-commerce Platform',
+      description: 'Full-stack e-commerce project using Next.js and modern technologies.',
+      tags: ['Web Development', 'Next.js', 'Full-stack'],
+    },
+    {
+      title: 'Real-time Chat App',
+      description: 'A real-time communication platform using WebSocket implementation.',
+      tags: ['Web Development', 'WebSocket', 'Real-time'],
+    },
+    {
+      title: 'Cybersecurity - CTF Write-ups',
+      description: 'Detailed write-ups of various Capture The Flag challenges.',
+      tags: ['Cybersecurity', 'CTF', 'Linux'],
+    },
+    {
+      title: 'Vulnerability Analysis',
+      description: 'Case studies on recent security vulnerabilities and their mitigations.',
+      tags: ['Cybersecurity', 'Analysis'],
+    },
+    {
+      title: 'Fitness Tracker',
+      description: 'A mobile application built with React Native for tracking workouts and health.',
+      tags: ['Mobile Dev', 'React Native'],
+    },
+    {
+      title: 'Recipe App',
+      description: 'A Flutter-based application for sharing and discovering food recipes.',
+      tags: ['Mobile Dev', 'Flutter'],
     }
   ];
+
+  const getYouTubeThumbnail = (url?: string) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      return `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg`;
+    }
+    return null;
+  };
+
+  const initialLimit = isMobile ? 3 : 4;
+  const displayedProjects = showAll ? allProjects : allProjects.slice(0, initialLimit);
 
   // Data Experience - Silakan ganti gambar, judul, dan deskripsi di sini
   const experiences = [
@@ -216,11 +171,6 @@ export default function Home() {
     }
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
-
-  const selectedCategoryData = projectCategories.find((category) => category.id === selectedCategory);
-  const selectedSubCategoryData = selectedCategoryData?.subcategories.find(
-    (subcategory) => subcategory.id === selectedSubCategory
-  );
 
   return (
     <main className="portfolio-page">    
@@ -324,7 +274,9 @@ export default function Home() {
           </div>
 
           <div className="about-content">
-            <h2 className="section-label">About Me</h2>
+            <span className="about-kicker">About</span>
+            <h2 className="about-title">About Me</h2>
+            <div className="about-divider" aria-hidden="true"></div>
             <div className="about-text">
               <ScrollReveal 
                 baseOpacity={0.2} 
@@ -341,211 +293,123 @@ export default function Home() {
 
       {/* SEKSI EXPERIENCE */}
       <section className="experience-section" id="work">
-        <h2 className="experience-title">Experience</h2>
-        <div className="experience-grid">
-          {experiences.map((exp) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="experience-card">
-
-                    <img src={exp.thumbnail} alt={exp.title} className="experience-logo" />
-                    <div className="experience-info">
-                      <h3>{exp.title}</h3>
-                      <p>{exp.role}</p>
-                    </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="experience-dialog">
-                  <div className="dialog-carousel-container">
-                    <div className="dialog-carousel">
-                      {exp.images.map((img, idx) => (
-                        <img key={idx} src={img} alt={`${exp.title} ${idx}`} className="dialog-image" />
-                      ))}
-                    </div>
-                    {exp.images.length > 1 && (
-                      <div className="carousel-indicator">
-                        <span>&rsaquo; swipe to see more</span>
+        <div className="experience-shell">
+          <div className="experience-intro">
+            <span className="experience-kicker">Experience</span>
+            <h2 className="experience-title">Experience</h2>
+            <p className="experience-summary">
+              Highlights of collaborations, competitions, and showcases where I sharpened my digital craft.
+            </p>
+          </div>
+          <div className="experience-list">
+            {experiences.map((exp) => (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="experience-card">
+                      <img src={exp.thumbnail} alt={exp.title} className="experience-logo" />
+                      <div className="experience-info">
+                        <h3>{exp.title}</h3>
+                        <p>{exp.role}</p>
                       </div>
-                    )}
-                  </div>
-                  <DialogHeader>
-                    <DialogTitle className="dialog-title">
-                      {exp.title}
-                    </DialogTitle>
-                    <DialogDescription className="dialog-description">
-                      {exp.description}
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-            </motion.div>
-          ))}
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="experience-dialog">
+                    <div className="dialog-carousel-container">
+                      <div className="dialog-carousel">
+                        {exp.images.map((img, idx) => (
+                          <img key={idx} src={img} alt={`${exp.title} ${idx}`} className="dialog-image" />
+                        ))}
+                      </div>
+                      {exp.images.length > 1 && (
+                        <div className="carousel-indicator">
+                          <span>&rsaquo; swipe to see more</span>
+                        </div>
+                      )}
+                    </div>
+                    <DialogHeader>
+                      <DialogTitle className="dialog-title">
+                        {exp.title}
+                      </DialogTitle>
+                      <DialogDescription className="dialog-description">
+                        {exp.description}
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
       {/* SEKSI PROJECT */}
       <section className="project-section" id="project">
-        <h2 className="experience-title">Projects</h2>
+        <h2 className="experience-title">Selected Projects</h2>
         
-        {/* Main Category Cards */}
-        <div className="project-categories">
-          {projectCategories.map((category) => (
+        <div className="new-projects-grid">
+          {displayedProjects.map((project, idx) => (
             <motion.div
-              key={category.id}
-              className="project-category-card"
-              onClick={() => setSelectedCategory(category.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              key={idx}
+              className="new-project-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              style={{
-                backgroundImage: category.bgImage 
-                  ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${category.bgImage})`
-                  : undefined,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
+              transition={{ delay: idx * 0.1 }}
             >
-              <div className="category-content">
-                <h3>{category.title}</h3>
-                <p>{category.description}</p>
+              <div className="new-project-image-container">
+                {project.image ? (
+                  <img src={project.image} alt={project.title} className="new-project-img" />
+                ) : getYouTubeThumbnail(project.link) ? (
+                  <img src={getYouTubeThumbnail(project.link)!} alt={project.title} className="new-project-img" />
+                ) : (
+                  <div className="new-project-placeholder">
+                    <span>Project {idx + 1}</span>
+                  </div>
+                )}
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="new-project-link-overlay">
+                    View Project ↗
+                  </a>
+                )}
               </div>
-              <div className="category-arrow">→</div>
+              <div className="new-project-info">
+                <div className="new-project-tags">
+                  {project.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="new-project-tag">{tag}</span>
+                  ))}
+                </div>
+                <h3 className="new-project-title">{project.title}</h3>
+                <p className="new-project-desc">{project.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {!showAll && allProjects.length > initialLimit && (
+          <div className="flex justify-center mt-12">
+            <button 
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 bg-transparent border border-white/20 hover:border-white/50 rounded-full text-white transition-all cursor-pointer font-medium"
+            >
+              More Projects
+            </button>
+          </div>
+        )}
       </section>
-
-      {/* Subcategories Modal */}
-      {selectedCategory && (
-        <motion.div
-          className="project-modal-overlay"
-          onClick={() => setSelectedCategory(null)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <div
-            className="project-modal"
-            onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-          >
-            <button 
-              className="modal-close-btn"
-              onClick={() => setSelectedCategory(null)}
-            >
-              ✕
-            </button>
-            
-            <h2>{selectedCategoryData?.title}</h2>
-            
-            <AnimatedList
-              className="subcategories-list"
-              items={selectedCategoryData?.subcategories ?? []}
-              onItemSelect={(subcategory) => setSelectedSubCategory(subcategory.id)}
-              getItemLabel={(subcategory) => subcategory.title}
-              renderItem={(subcategory) => (
-                <div className="subcategory-item">
-                  <div>
-                    <h3>{subcategory.title}</h3>
-                    <p>{subcategory.projects.length} projects</p>
-                  </div>
-                  <div className="item-arrow">→</div>
-                </div>
-              )}
-            />
-          </div>
-        </motion.div>
-      )}
-
-      {/* Projects Detail Modal */}
-      {selectedCategory && selectedSubCategory && (
-        <motion.div
-          className="project-modal-overlay"
-          onClick={() => setSelectedSubCategory(null)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <div
-            className="project-modal"
-            onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-          >
-            <button 
-              className="modal-close-btn"
-              onClick={() => setSelectedSubCategory(null)}
-            >
-              ✕
-            </button>
-            
-            <button
-              className="modal-back-btn"
-              onClick={() => setSelectedSubCategory(null)}
-            >
-              ← Back
-            </button>
-            
-            <h2>{selectedSubCategoryData?.title}</h2>
-
-            <div
-              className={`project-detail-scroll ${
-                selectedSubCategoryData?.id === "pancasila" ? "is-scrollable" : ""
-              }`}
-            >
-              {selectedSubCategoryData?.description && (
-                <p className="subcategory-description">
-                  {selectedSubCategoryData.description}
-                </p>
-              )}
-
-              <div className="projects-list">
-                {selectedSubCategoryData?.projects.map((project, idx) =>
-                  project.href ? (
-                    <motion.a
-                      key={idx}
-                      className="project-item project-item-link"
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <h4>{project.name}</h4>
-                      <p>{project.description}</p>
-                    </motion.a>
-                  ) : (
-                    <motion.div
-                      key={idx}
-                      className="project-item"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <h4>{project.name}</h4>
-                      <p>{project.description}</p>
-                    </motion.div>
-                  )
-                )}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
 
       {/* CONTACT SECTION */}
       <section className="experience-section" id="contact">
         <h2 className="experience-title">Get in Touch</h2>
         <div className="text-center">
           <p className="text-xl text-gray-400 mb-8">Have a project in mind or just want to chat?</p>
-          <a href="mailto:your-email@example.com" className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors">
-            Say Hello
+          <a href="mailto:rizkihanif01@gmail.com" className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors">
+            Hello
           </a>
         </div>
       </section>
