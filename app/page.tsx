@@ -159,17 +159,17 @@ export default function Home() {
     {
       id: 2,
       title: "DIGIFEST 2025",
-      role: "",
+      role: "Pemkot Tangerang",
       thumbnail: "/digifest-1.png",
       images: ["/digifest-1.png", "/digifest-2.png", "/digifest-3.png"], // Tambahkan banyak path gambar di sini
-      description: "Add your detailed description for the second experience here."
+      description: "Digifest 2025 adalah bagian dari Cisadane Digital Festival 2025, festival tahunan kolaboratif yang diselenggarakan oleh Pemerintah Kota Tangerang.  Acara ini menggabungkan budaya tradisional dan inovasi digital di sepanjang bantaran Sungai Cisadane dengan tema 'Celebrating The River, Flowing The Future'.  Digifest hadir sebagai wadah bagi pelaku industri digital, UMKM, dan masyarakat untuk mengeksplorasi teknologi, kreativitas, dan hiburan. Pada festival ini kami ber-4 diajak dosen untuk meenjaga stand da"
     },
     {
       id: 3,
       title: "INDOCOMTECH",
-      role: "Company / Role Name",
-      thumbnail: "/arya-1.png",
-      images: ["/arya-1.png", "/arya-3.png", "/arya-2.png"], // Tambahkan banyak path gambar di sini
+      role: "Pemeran Teknologi",
+      thumbnail: "/komtek-1.png",
+      images: ["/komtek-1.png", "/komtek-3.png", "/komtek-2.png"], // Tambahkan banyak path gambar di sini
       description: "Indocomtech 2025 adalah pameran teknologi konsumen terbesar di Indonesia yang diselenggarakan oleh Yayasan Apkomindo Indonesia (YAI) bersama Satue Event. Acara ini menampilkan berbagai produk dan inovasi teknologi terbaru dari berbagai perusahaan terkemuka di industri teknologi, termasuk perangkat elektronik, gadget, perangkat lunak, dan solusi teknologi lainnya. Pada festival ini saya dan kelompok saya jadi mendapatkan ilmu baru tentang teknologi terbaru, tren industri, dan peluang kolaborasi dengan para profesional di bidang teknologi."
     },
     {
@@ -313,7 +313,12 @@ export default function Home() {
               <div className="tech-tags">
                 <span>Linux</span>
                 <span>Next.js</span>
-                <span>CyberSec</span>
+                <span>Cyber Security</span>
+                <span>React</span>
+                <span>Python</span>
+                <span>JavaScript</span>
+                <span>Node.js</span>
+                <span>Git</span>
               </div>
             </motion.div>
           </div>
